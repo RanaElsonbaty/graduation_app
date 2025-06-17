@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:graduation/core/theming/colors.dart';
 import 'package:graduation/features/auth/register/presentation/view/register_view.dart';
+import 'package:graduation/features/stream/presentation/view/main%20option_materail.dart';
 import 'package:graduation/features/subjects/presentation/view_model/cubit/subject_cubit.dart';
 import 'package:graduation/features/subjects/presentation/view_model/cubit/subject_state.dart';
 
@@ -17,7 +19,7 @@ class SubjectScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text('Subjects'),
-          backgroundColor: Colors.blue.shade800,
+          backgroundColor: AppColors.primary,
         ),
         body: BlocConsumer<SubjectCubit, SubjectState>(
           listener: (context, state) {
@@ -63,7 +65,7 @@ class SubjectScreen extends StatelessWidget {
                         icon: const Icon(Icons.refresh),
                         label: const Text('Retry'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.blue.shade800,
+                          backgroundColor: AppColors.secondary,
                         ),
                       ),
                     ],
@@ -91,18 +93,23 @@ class SubjectScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8),
                     ),
                     child: ListTile(
-                      leading: Icon(Icons.book, color: Colors.blue.shade700),
+                      leading: Icon(Icons.book, color:AppColors.primary),
                       title: Text(
-                        subject.name,
+                        subject.courseName,
                         style: TextStyle(
-                          color: Colors.blue.shade900,
+                          color: AppColors.primary,
                           fontWeight: FontWeight.w600,
                           fontSize: 16,
                         ),
                       ),
                       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                       onTap: () {
-                        // لو تريد تفتح تفاصيل المادة هنا
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => OptionsMaterial (subjectId: subject.id),
+                          ),
+                        );
                       },
                     ),
                   );

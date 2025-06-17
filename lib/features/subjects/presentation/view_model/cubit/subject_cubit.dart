@@ -16,9 +16,10 @@ class SubjectCubit extends Cubit<SubjectState> {
     try {
       print("Fetching subjects with semester=$semster and level=$level");
 
-      await GlobalStorage.loadData(); // لو مش محملة قبل كده
+
       final token = GlobalStorage.token;
 
+        print("token is : $token");
       final response = await _dio.get(
         'https://graduation-project-lilac-five.vercel.app/users/getAllSubjects',
         queryParameters: {
@@ -27,7 +28,7 @@ class SubjectCubit extends Cubit<SubjectState> {
         },
         options: Options(
           headers: {
-            'authorization': 'Bearer $token',
+            'Authorization': token,
           },
           validateStatus: (status) => status != null && status < 500,
         ),
@@ -36,6 +37,7 @@ class SubjectCubit extends Cubit<SubjectState> {
 
       print("Status Code: ${response.statusCode}");
       print("Response Data: ${response.data}");
+      print("token $token");
 
       if (response.statusCode == 200) {
         final subjectsData = response.data['subjects'];
@@ -46,10 +48,13 @@ class SubjectCubit extends Cubit<SubjectState> {
         if (subjectsData.isEmpty) {
           emit(SubjectEmpty());
         } else {
-          final subjects = (subjectsData as List).map((e) => Subject.fromJson(e)).toList();
+          final subjects = (subjectsData as List)
+              .map((e) => Subject.fromJson(e))
+              .toList();
           emit(SubjectLoaded(subjects));
         }
-      } else if (response.statusCode == 401) {
+      }
+      else if (response.statusCode == 401) {
         // 401 Unauthorized غالبا يعني التوكن غير صالح أو منتهي
         await _handleInvalidToken();
       } else {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:graduation/core/theming/colors.dart';
 import 'package:graduation/features/subjects/presentation/view/subject_view.dart';
 
 class SelectionScreen extends StatefulWidget {
+  const SelectionScreen({super.key});
+
   @override
   State<SelectionScreen> createState() => _SelectionScreenState();
 }
@@ -36,7 +39,7 @@ class _SelectionScreenState extends State<SelectionScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Choose Semester & Level"),
-        backgroundColor: Colors.blue.shade800,
+        backgroundColor: AppColors.primary,
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -61,9 +64,9 @@ class _SelectionScreenState extends State<SelectionScreen> {
             ElevatedButton(
               onPressed: navigateToSubjectScreen,
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue.shade700,
+                backgroundColor: AppColors.primary,
               ),
-              child: Text('Show Subjects'),
+              child: Text('Show Subjects', style: const TextStyle(color: Colors.white)),
             ),
           ],
         ),

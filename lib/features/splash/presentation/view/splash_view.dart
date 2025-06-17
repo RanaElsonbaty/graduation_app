@@ -1,9 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:graduation/core/helper_functions/extension.dart';
-import 'package:graduation/core/routing/routes.dart';
+import 'package:graduation/core/helper_functions/global_storage.dart';
 import 'package:graduation/core/theming/colors.dart';
+import 'package:graduation/features/auth/login/presentation/view/login_view.dart';
+import 'package:graduation/features/selection/presentation/view/selection_view.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SplashView extends StatefulWidget {
@@ -15,13 +16,24 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
+  // void initState() {
+  //   super.initState();
+  //   Future.delayed(
+  //       const Duration(seconds: 3),
+  //           (){
+  //         context.pushReplacementNamed(Routes.login);
+  //       }
+  //   );
+  // }
   void initState() {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-        const Duration(seconds: 3),
+        const Duration(seconds: 5),
             (){
-          context.pushReplacementNamed(Routes.login);
+          GlobalStorage.token==""?
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> LoginView()),(route)=>false):
+          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> SelectionScreen(),),(route)=>false);
         }
     );
   }

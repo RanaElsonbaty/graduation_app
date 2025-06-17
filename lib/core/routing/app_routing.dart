@@ -4,6 +4,7 @@ import 'package:graduation/features/auth/login/presentation/view/login_view.dart
 import 'package:graduation/features/auth/register/presentation/view/register_view.dart';
 import 'package:graduation/features/selection/presentation/view/selection_view.dart';
 import 'package:graduation/features/splash/presentation/view/splash_view.dart';
+import 'package:graduation/features/subjects/presentation/view/subject_view.dart';
 
 class AppRoutes {
   Route generateRoute(RouteSettings routeSettings) {

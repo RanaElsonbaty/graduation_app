@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:graduation/core/routing/routes.dart';
 import 'package:graduation/core/theming/colors.dart';
 import 'package:graduation/features/subjects/presentation/view/subject_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SelectionScreen extends StatefulWidget {
   const SelectionScreen({super.key});
@@ -40,6 +42,16 @@ class _SelectionScreenState extends State<SelectionScreen> {
       appBar: AppBar(
         title: Text("Choose Semester & Level"),
         backgroundColor: AppColors.primary,
+        actions: [
+          IconButton(
+            onPressed: () async {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.clear();
+              Navigator.of(context).pushNamedAndRemoveUntil(Routes.login, (route) => false);
+            },
+            icon: Icon(Icons.logout, color: Colors.black),
+          )
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

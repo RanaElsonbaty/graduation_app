@@ -24,7 +24,6 @@ class SubjectScreen extends StatelessWidget {
         body: BlocConsumer<SubjectCubit, SubjectState>(
           listener: (context, state) {
             if (state is SubjectUnauthorized) {
-              // لو التوكن انتهى صلاحية أو المستخدم غير مسجل، نعرض رسالة ونرجع
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Session expired, please login again.'),
@@ -32,7 +31,6 @@ class SubjectScreen extends StatelessWidget {
                 ),
               );
 
-              // الرجوع لشاشة تسجيل الدخول أو الشاشة الرئيسية حسب تطبيقك
               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignupView()));
             }
           },
